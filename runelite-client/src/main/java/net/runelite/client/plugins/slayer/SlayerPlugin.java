@@ -78,7 +78,7 @@ import net.runelite.client.util.Text;
 public class SlayerPlugin extends Plugin
 {
 	//Chat messages
-	private static final Pattern CHAT_GEM_PROGRESS_MESSAGE = Pattern.compile("You're assigned to kill (.*); only (\\d*) more to go\\.");
+	private static final Pattern CHAT_GEM_PROGRESS_MESSAGE = Pattern.compile("^(?:You're assigned to kill|You have received a new Slayer assignment from .*:) (.*?)(?: in the Wilderness)?(?:; only | \\()(\\d*)(?: more to go\\.|\\))$");
 	private static final String CHAT_GEM_COMPLETE_MESSAGE = "You need something new to hunt.";
 	private static final Pattern CHAT_COMPLETE_MESSAGE = Pattern.compile("(?:\\d+,)*\\d+");
 	private static final String CHAT_CANCEL_MESSAGE = "Your task has been cancelled.";
@@ -95,6 +95,7 @@ public class SlayerPlugin extends Plugin
 
 	//NPC messages
 	private static final Pattern NPC_ASSIGN_MESSAGE = Pattern.compile(".*Your new task is to kill\\s*(\\d*) (.*)\\.");
+	private static final Pattern NPC_ASSIGN_BOSS_MESSAGE = Pattern.compile("^Excellent. You're now assigned to kill (.*) (\\d+) times.*Your reward point tally is (.*)\\.$");
 	private static final Pattern NPC_CURRENT_MESSAGE = Pattern.compile("You're still hunting (.*); you have (\\d*) to go\\..*");
 
 	//Reward UI
@@ -262,19 +263,23 @@ public class SlayerPlugin extends Plugin
 		if (NPCDialog != null)
 		{
 			String NPCText = Text.removeTags(NPCDialog.getText()); //remove color and linebreaks
-			Matcher mAssign = NPC_ASSIGN_MESSAGE.matcher(NPCText); //number, name
-			Matcher mCurrent = NPC_CURRENT_MESSAGE.matcher(NPCText); //name, number
-			boolean found1 = mAssign.find();
-			boolean found2 = mCurrent.find();
-			if (!found1 && !found2)
+			final Matcher mAssign = NPC_ASSIGN_MESSAGE.matcher(NPCText); //number, name
+			final Matcher mAssignBoss = NPC_ASSIGN_BOSS_MESSAGE.matcher(NPCText); // name, number, points
+			final Matcher mCurrent = NPC_CURRENT_MESSAGE.matcher(NPCText); //name, number
+
+			if (mAssign.find())
 			{
-				return;
+				setTask(mAssign.group(2), Integer.parseInt(mAssign.group(1)));
 			}
-
-			String taskName = found1 ? mAssign.group(2) : mCurrent.group(1);
-			int amount = Integer.parseInt(found1 ? mAssign.group(1) : mCurrent.group(2));
-
-			setTask(taskName, amount);
+			else if (mAssignBoss.find())
+			{
+				setTask(mAssignBoss.group(1), Integer.parseInt(mAssignBoss.group(2)));
+				points = Integer.parseInt(mAssignBoss.group(3).replaceAll(",", ""));
+			}
+			else if (mCurrent.find())
+			{
+				setTask(mCurrent.group(1), Integer.parseInt(mCurrent.group(2)));
+			}
 		}
 
 		Widget braceletBreakWidget = client.getWidget(WidgetInfo.DIALOG_SPRITE_TEXT);
@@ -413,13 +418,13 @@ public class SlayerPlugin extends Plugin
 		}
 
 		Matcher mProgress = CHAT_GEM_PROGRESS_MESSAGE.matcher(chatMsg);
+
 		if (!mProgress.find())
 		{
 			return;
 		}
 		String taskName = mProgress.group(1);
 		int amount = Integer.parseInt(mProgress.group(2));
-
 		setTask(taskName, amount);
 	}
 

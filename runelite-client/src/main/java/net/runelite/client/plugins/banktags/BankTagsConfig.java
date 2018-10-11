@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, Robbie McLeod <https://github.com/rbbi>
+ * Copyright (c) 2018, Ron Young <https://github.com/raiyni>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,17 +22,41 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+package net.runelite.client.plugins.banktags;
 
-package net.runelite.client.plugins.skillcalculator;
+import net.runelite.client.config.Config;
+import net.runelite.client.config.ConfigGroup;
+import net.runelite.client.config.ConfigItem;
 
-import javax.swing.JCheckBox;
-import lombok.Getter;
-import lombok.Setter;
-import net.runelite.client.plugins.skillcalculator.beans.SkillDataBonus;
-
-class BonusCheckBox extends JCheckBox
+@ConfigGroup("banktags")
+public interface BankTagsConfig extends Config
 {
-	@Getter
-	@Setter
-	private SkillDataBonus bonus;
+	@ConfigItem(
+		keyName = "useTabs",
+		name = "Use Tag Tabs",
+		description = "Enable the ability to add tabs to your bank which allow fast access to tags.",
+		position = 1
+	)
+	default boolean tabs()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+		keyName = "position",
+		name = "",
+		description = "",
+		hidden = true
+	)
+	default int position()
+	{
+		return 0;
+	}
+
+	@ConfigItem(
+		keyName = "position",
+		name = "",
+		description = ""
+	)
+	void position(int idx);
 }
