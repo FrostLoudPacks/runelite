@@ -93,6 +93,7 @@ public class FeedController
 	}
 
 	@RequestMapping
+
 	public FeedResult getFeed()
 	{
 		return feedResult;

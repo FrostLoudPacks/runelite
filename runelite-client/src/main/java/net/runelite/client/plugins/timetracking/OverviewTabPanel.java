@@ -75,7 +75,7 @@ class OverviewTabPanel extends TabContentPanel
 				Function.identity(),
 				t ->
 				{
-					OverviewItemPanel p = new OverviewItemPanel(itemManager, pluginPanel, t, t.getName());
+					OverviewItemPanel p = new OverviewItemPanel(itemManager, pluginPanel, t, t.getName() + " Patches");
 					add(p);
 					return p;
 				}

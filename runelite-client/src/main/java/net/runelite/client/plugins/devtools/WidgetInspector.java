@@ -161,6 +161,7 @@ class WidgetInspector extends JFrame
 	{
 		clientThread.invokeLater(() ->
 		{
+
 			Widget[] rootWidgets = client.getWidgetRoots();
 			DefaultMutableTreeNode root = new DefaultMutableTreeNode();
 

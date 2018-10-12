@@ -115,6 +115,8 @@ public class WidgetID
 	public static final int WORLD_SWITCHER_GROUP_ID = 69;
 	public static final int DIALOG_OPTION_GROUP_ID = 219;
 	public static final int DIALOG_PLAYER_GROUP_ID = 217;
+
+	public static final int DUEL_GROUP_ID = 482;
 	public static final int FOSSIL_ISLAND_OXYGENBAR_ID = 609;
 	public static final int MINIGAME_TAB_ID = 76;
 	public static final int SPELLBOOK_GROUP_ID = 218;
@@ -675,12 +677,12 @@ public class WidgetID
 
 	static class StandardSpellBook
 	{
-		static final int LUMBRIDGE_HOME_TELEPORT = 4;
+		static final int LUMBRIDGE_HOME_TELEPORT = 1;
 	}
 
 	static class AncientSpellBook
 	{
-		static final int EDGEVILLE_HOME_TELEPORT = 98;
+		static final int EDGEVILLE_HOME_TELEPORT = 97;
 	}
 
 	static class LunarSpellBook
@@ -690,7 +692,7 @@ public class WidgetID
 
 	static class ArceuusSpellBook
 	{
-		static final int ARCEUUS_HOME_TELEPORT = 143;
+		static final int ARCEUUS_HOME_TELEPORT = 145;
 	}
 
 	static class Pvp
