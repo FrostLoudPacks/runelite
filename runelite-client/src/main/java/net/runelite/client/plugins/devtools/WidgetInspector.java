@@ -161,8 +161,15 @@ class WidgetInspector extends JFrame
 	{
 		clientThread.invokeLater(() ->
 		{
+<<<<<<< HEAD
 			Widget[] rootWidgets = client.getWidgetRoots();
 			DefaultMutableTreeNode root = new DefaultMutableTreeNode();
+=======
+			@Override
+			protected DefaultMutableTreeNode doInBackground() {
+				Widget[] rootWidgets = client.getWidgetRoots();
+				DefaultMutableTreeNode root = new DefaultMutableTreeNode();
+>>>>>>> refs/remotes/origin/runelite-master
 
 			plugin.currentWidget = null;
 			plugin.itemIndex = -1;

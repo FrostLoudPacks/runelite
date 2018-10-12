@@ -93,8 +93,13 @@ public class FeedController
 	}
 
 	@RequestMapping
+<<<<<<< HEAD
 	public FeedResult getFeed()
 	{
 		return feedResult;
+=======
+	public FeedResult getFeed() {
+		return feed.get();
+>>>>>>> refs/remotes/origin/runelite-master
 	}
 }
