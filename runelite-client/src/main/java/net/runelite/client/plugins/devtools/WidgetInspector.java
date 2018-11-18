@@ -142,17 +142,6 @@ class WidgetInspector extends JFrame
 		onConfigChanged(null);
 		bottomPanel.add(alwaysOnTop);
 
-		final JButton revalidateWidget = new JButton("Revalidate");
-		revalidateWidget.addActionListener(ev -> clientThread.invokeLater(() ->
-		{
-			if (plugin.currentWidget == null)
-			{
-				return;
-			}
-
-			plugin.currentWidget.revalidate();
-		}));
-		bottomPanel.add(revalidateWidget);
 
 		final JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, treeScrollPane, infoScrollPane);
 		add(split, BorderLayout.CENTER);
@@ -172,9 +161,15 @@ class WidgetInspector extends JFrame
 	{
 		clientThread.invokeLater(() ->
 		{
-
+<<<<<<< HEAD
 			Widget[] rootWidgets = client.getWidgetRoots();
 			DefaultMutableTreeNode root = new DefaultMutableTreeNode();
+=======
+			@Override
+			protected DefaultMutableTreeNode doInBackground() {
+				Widget[] rootWidgets = client.getWidgetRoots();
+				DefaultMutableTreeNode root = new DefaultMutableTreeNode();
+>>>>>>> refs/remotes/origin/runelite-master
 
 			plugin.currentWidget = null;
 			plugin.itemIndex = -1;

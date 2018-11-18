@@ -27,7 +27,6 @@ package net.runelite.http.service.feed;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.http.api.feed.FeedItem;
 import net.runelite.http.api.feed.FeedResult;
@@ -35,8 +34,6 @@ import net.runelite.http.service.feed.blog.BlogService;
 import net.runelite.http.service.feed.osrsnews.OSRSNewsService;
 import net.runelite.http.service.feed.twitter.TwitterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.CacheControl;
-import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -96,16 +93,13 @@ public class FeedController
 	}
 
 	@RequestMapping
-	public ResponseEntity<FeedResult> getFeed()
+<<<<<<< HEAD
+	public FeedResult getFeed()
 	{
-		if (feedResult == null)
-		{
-			return ResponseEntity.notFound()
-				.build();
-		}
-
-		return ResponseEntity.ok()
-			.cacheControl(CacheControl.maxAge(10, TimeUnit.MINUTES).cachePublic())
-			.body(feedResult);
+		return feedResult;
+=======
+	public FeedResult getFeed() {
+		return feed.get();
+>>>>>>> refs/remotes/origin/runelite-master
 	}
 }
