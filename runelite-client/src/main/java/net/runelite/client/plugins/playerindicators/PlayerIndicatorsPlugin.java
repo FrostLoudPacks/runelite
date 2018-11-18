@@ -98,7 +98,7 @@ public class PlayerIndicatorsPlugin extends Plugin
 	}
 
 	@Subscribe
-	public void onMenuEntryAdd(MenuEntryAdded menuEntryAdded)
+	public void onMenuEntryAdded(MenuEntryAdded menuEntryAdded)
 	{
 		int type = menuEntryAdded.getType();
 
