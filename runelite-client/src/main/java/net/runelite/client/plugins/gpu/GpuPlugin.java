@@ -29,6 +29,7 @@ import com.google.inject.Provides;
 import com.jogamp.nativewindow.AbstractGraphicsConfiguration;
 import com.jogamp.nativewindow.NativeWindowFactory;
 import com.jogamp.nativewindow.awt.AWTGraphicsConfiguration;
+import static com.jogamp.nativewindow.awt.AWTGraphicsConfiguration.*;
 import com.jogamp.nativewindow.awt.JAWTWindow;
 import com.jogamp.opengl.GL;
 import static com.jogamp.opengl.GL2ES2.GL_DEBUG_OUTPUT;
@@ -230,7 +231,7 @@ public class GpuPlugin extends Plugin implements DrawCallbacks
 				GLProfile glProfile = GLProfile.get(GLProfile.GL4bc);
 
 				GLCapabilities glCaps = new GLCapabilities(glProfile);
-				AbstractGraphicsConfiguration config = AWTGraphicsConfiguration.create(canvas.getGraphicsConfiguration(),
+				AbstractGraphicsConfiguration config = create(canvas.getGraphicsConfiguration(),
 					glCaps, glCaps);
 
 				jawtWindow = (JAWTWindow) NativeWindowFactory.getNativeWindow(canvas, config);
