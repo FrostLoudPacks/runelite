@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, Tomas Slusny <slusnucky@gmail.com>
+ * Copyright (c) 2017, Seth <Sethtroll3@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,35 +22,50 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package net.runelite.client.plugins.duelnotifier;
+package net.runelite.client.plugins.loginscreen;
 
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
 
-import java.awt.*;
-
-@ConfigGroup("duelnotifier")
-public interface DuelNotifierConfig extends Config
+@ConfigGroup("loginscreen")
+public interface LoginScreenConfig extends Config
 {
 	@ConfigItem(
-		position = 0,
-		keyName = "enableOverlay",
-		name = "Enable Duel Request Overlay",
-		description = "Flashes screen when a duel request is received"
+		keyName = "syncusername",
+		name = "Sync username",
+		description = "Syncs the username that is currently remembered between computers"
 	)
-	default boolean overlayEnabled() { return false; }
-
-	@ConfigItem(
-		position = 1,
-		keyName = "overlayColor",
-		name = "Screen Overlay Color",
-		description = "Color of the screen overlay"
-	)
-	default Color getOverlayColor()
+	default boolean syncUsername()
 	{
-		return new Color(255, 0, 0, 140);
+		return true;
 	}
 
+	@ConfigItem(
+		keyName = "pasteenabled",
+		name = "Ctrl-V paste",
+		description = "Enables Ctrl+V pasting on the login screen"
+	)
+	default boolean pasteEnabled()
+	{
+		return false;
+	}
 
+	@ConfigItem(
+		keyName = "username",
+		name = "",
+		description = "",
+		hidden = true
+	)
+	default String username()
+	{
+		return "";
+	}
+
+	@ConfigItem(
+		keyName = "username",
+		name = "",
+		description = ""
+	)
+	void username(String key);
 }
