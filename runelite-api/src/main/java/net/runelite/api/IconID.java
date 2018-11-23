@@ -1,6 +1,5 @@
 /*
- * Copyright (c) 2018, Adam <Adam@sigterm.info>
- * Copyright (c) 2018, Tomas Slusny <slusnucky@gmail.com>
+ * Copyright (c) 2018, Hydrox6 <ikada@protonmail.ch>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -23,30 +22,37 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package net.runelite.http.service.updatecheck;
+package net.runelite.api;
 
-import java.util.HashMap;
-import java.util.Map;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
+/**
+ * Enum of all official icons that Jagex uses in chat.
+ */
+@RequiredArgsConstructor
 @Getter
-class RSConfig
+public enum IconID
 {
-	private final Map<String, String> appletProperties = new HashMap<>();
-	private final Map<String, String> classLoaderProperties = new HashMap<>();
+	PLAYER_MODERATOR(0),
+	JAGEX_MODERATOR(1),
+	IRONMAN(2),
+	ULTIMATE_IRONMAN(3),
+	DMM_SKULL_5_KEYS(4),
+	DMM_SKULL_4_KEYS(5),
+	DMM_SKULL_3_KEYS(6),
+	DMM_SKULL_2_KEYS(7),
+	DMM_SKULL_1_KEYS(8),
+	SKULL(9),
+	HARDCORE_IRONMAN(10),
+	NO_ENTRY(11),
+	CHAIN_LINK(12);
 
-	String getCodeBase()
-	{
-		return classLoaderProperties.get("codebase");
-	}
+	private final int index;
 
-	String getInitialJar()
+	@Override
+	public String toString()
 	{
-		return classLoaderProperties.get("initial_jar");
-	}
-
-	String getInitialClass()
-	{
-		return classLoaderProperties.get("initial_class").replace(".class", "");
+		return "<img=" + String.valueOf(this.index) + ">";
 	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Seth <Sethtroll3@gmail.com>
+ * Copyright (c) 2018, Brett Middle <https://github.com/bmiddle>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,30 +22,22 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package net.runelite.client.plugins.usernamesyncer;
+package net.runelite.client.plugins.combatlevel;
 
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
 
-@ConfigGroup("rememberusername")
-public interface UsernameSyncerConfig extends Config
+@ConfigGroup("combatlevel")
+public interface CombatLevelConfig extends Config
 {
 	@ConfigItem(
-		keyName = "username",
-		name = "",
-		description = "",
-		hidden = true
+		keyName = "showLevelsUntil",
+		name = "Calculate next level",
+		description = "Mouse over the combat level to calculate what skill levels will increase combat."
 	)
-	default String username()
+	default boolean showLevelsUntil()
 	{
-		return "";
+		return true;
 	}
-
-	@ConfigItem(
-		keyName = "username",
-		name = "",
-		description = ""
-	)
-	void username(String key);
 }
